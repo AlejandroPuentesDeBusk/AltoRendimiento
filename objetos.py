@@ -1,30 +1,17 @@
 import math
+import turtle
 
-class Figuras():
-
-    ubicacion_x = 0
-    ubicacion_y = 0
+screen = turtle.Screen()
+screen.title("Gato")
+tur = turtle.Turtle()
+speed= tur.speed(0)
     
-    def __init__(self):
-        None
-
-    def dibujaFigura(self):
-        None
-        
-    def get_area(self):
-        return 999999999.9
-
-    def modificar_x(self, x):
-        self.ubicacion_x = x
-    
-    def modificar_y(self, y):
-        self.ubicacion_y = y
-    
-class Rectangulo(Figuras):
+class Rectangulo():
 
     altura = 0.0
     base = 0.0
     
+
     def __init__(self,altura,base):
         self.altura = float(altura)
         self.base = float(base)
@@ -34,15 +21,25 @@ class Rectangulo(Figuras):
         
     def area(self):
         return self.altura * self.base
+    
+    def dibujo(self):
+
+        for i in range(2):
+            tur.forward(self.altura)
+            tur.left(90)
+            tur.forward(self.base)
+            tur.left(90)   
 
 
-class Circulo(Figuras):
+class Circulo():
 
     radio = 0.0
-
+   
+    
     def __init__(self, radio):
 
         self.radio = float(radio)
+       
 
     def area(self):
 
@@ -51,8 +48,30 @@ class Circulo(Figuras):
     def __text__(self):
 
         return "Area del circulo =" + str(self.area())
+    
+    def dibujo(self):
 
-class Triangulo(Figuras):
+        tur.circle(self.radio)
+       
+
+class Reg():
+
+    line = 0.0 
+    
+
+    def __init__(self,line):
+
+        self.line = float(line)
+
+    def dibujo(self):
+
+        tur.penup()
+        tur.goto(-100,100)
+        tur.right(90)
+        tur.pendown
+        tur.forward(self.line)
+
+class Triangulo():
 
     base = 0.0
     altura = 0.0
@@ -72,12 +91,49 @@ class Triangulo(Figuras):
         return "Area del triángulo" + str(self.area())
 
 
-rect = Rectangulo(6,9)
-print(rect.area())
+
+screen.setup(width=400, height=300)
+width = screen.window_width()
+height = screen.window_height()
 
 
-tri = Triangulo(2,2)
-print(tri.area())
+initial_position = tur.position()
+print(f"La posición inicial de la tortuga es {initial_position}")
 
-circ = Circulo(15)
-print(circ.area())
+
+tur.penup()
+ 
+
+R1W = width/6
+R1H = height/6
+
+tur.goto(-width/2, R1H)
+tur.pendown()
+tur.forward(width)
+tur.penup()
+
+tur.goto(-width/2, -R1H)
+tur.pendown()
+tur.forward(width)
+tur.penup()
+
+tur.goto(-R1W, height/2)
+tur.pendown()
+tur.goto(-R1W,-height/2)
+tur.penup()
+
+tur.goto(R1W, height/2)
+tur.pendown()
+tur.goto(R1W, -height/2)
+
+
+
+circ = Circulo(45)
+rect = Rectangulo(100, 200)
+
+#print(line,rect, circ)
+#rect.dibujo()
+circ.dibujo()
+
+
+turtle.done()
