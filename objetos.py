@@ -1,6 +1,5 @@
 import turtle
 
-
 width = 600
 
 screen = turtle.Screen()
@@ -35,7 +34,7 @@ class Circulo():
     y = 0
    
     
-    def __init__(self, radio,x,y):
+    def __init__(self, radio,x=0,y=0):
 
         self.radio = float(radio)
         self.x = int(x)
@@ -44,9 +43,17 @@ class Circulo():
     def dibujo(self):
 
         tur.penup()
-        tur.goto(self.x, self.y/2)
+        tur.goto(self.x, self.y-self.radio)
         tur.pendown()
         tur.circle(self.radio)
+
+def dibujar_circulo(x,y):
+
+    circ = Circulo(width/6,x,y)
+    circ.dibujo()
+
+
+screen.onclick(dibujar_circulo)
        
 
 class Tacha():
@@ -55,13 +62,17 @@ class Tacha():
     x = 0
     y = 0
 
-    def __init__(self,line,x,y):
+    def __init__(self,line,x=0,y=0):
 
         self.line = float(line)
         self.x = int(x)
         self.y = int(y)
 
     def dibujo(self):
+
+        tur.penup()
+        tur.goto(self.x, self.y)
+        tur.pendown()
 
         for i in range(4):
 
@@ -71,6 +82,14 @@ class Tacha():
             tur.right(45)
             tur.forward(self.line/2)
             tur.right(45)
+           
+
+def dibujar_tacha(x, y):
+    tacha = Tacha(width/3, x, y)  
+    tacha.dibujo()
+
+
+screen.onclick(dibujar_tacha)
 
 
 class Reg():
@@ -109,29 +128,32 @@ class Reg():
 
         tur.penup()
 
+def tablero():
 
-reg=Reg(600,600)
-reg.dibujo()
+    reg=Reg(width,width)
+    reg.dibujo()
 
-
-
-for i in range(3):
-
-    cor_x = input("x")
-    cor_y = input("y")
-    ex = Tacha(width/3,cor_x,cor_y)
-    ex.dibujo()
-    x = input("x")
-    y = input("y")
-    circ = Circulo(width/6,x,y)
-    circ.dibujo()
+tablero()
 
 
 
+turno = True
+
+def turnos(x, y):
+
+    global turno 
 
 
-ex.dibujo()
+    if turno == True:
+        tacha = Tacha(width/3, x, y)  
+        tacha.dibujo()
+    else:
+        circ = Circulo(width/6,x,y)
+        circ.dibujo()
 
+    turno = not turno   
+
+screen.onclick(turnos)
 
 
 turtle.done()
