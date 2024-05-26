@@ -1,33 +1,20 @@
 import turtle
 
-width = 600
 
+#Turtle parameters
+width = 600
+tur = turtle.Turtle()
 screen = turtle.Screen()
 screen.setup( width , width)
+turtle.bgcolor("#729A91")
 screen.title("Gato")
-tur = turtle.Turtle()
 speed= tur.speed(0)
-    
-class Rectangulo():
 
-    altura = 0.0
-    base = 0.0
     
 
-    def __init__(self,altura,base):
-        self.altura = float(altura)
-        self.base = float(base)
-    
-    def dibujo(self):
 
-        for i in range(2):
-            tur.forward(self.altura)
-            tur.left(90)
-            tur.forward(self.base)
-            tur.left(90)   
-
-
-class Circulo():
+#Creamos el objeto circulo, se dibuja en el punto donde das click
+class Circle():
 
     radio = 0.0
     x = 0
@@ -36,28 +23,33 @@ class Circulo():
     
     def __init__(self, radio,x=0,y=0):
 
-        self.radio = float(radio)
+        self.radio = float(radio)-10
         self.x = int(x)
         self.y = int(y)
        
-    def dibujo(self):
+    def draw(self):
+
+        tur.width(5)
+        tur.color("#E0E8E6")
 
         tur.penup()
         tur.goto(self.x, self.y-self.radio)
         tur.pendown()
         tur.circle(self.radio)
 
-def dibujar_circulo(x,y):
+def draw_circle(x,y):
 
-    circ = Circulo(width/6,x,y)
-    circ.dibujo()
+    circ = Circle(width/6,x,y)
+    circ.draw()
 
 
-screen.onclick(dibujar_circulo)
+#screen.onclick(draw_circle)
        
 
+#Creamos el objeto tacha y que se dibuje donde damos click
 class Tacha():
 
+    
     line = 0.0
     x = 0
     y = 0
@@ -68,11 +60,15 @@ class Tacha():
         self.x = int(x)
         self.y = int(y)
 
-    def dibujo(self):
+    def draw(self):
+
+        tur.width(5)
+        tur.color("#272727")
 
         tur.penup()
         tur.goto(self.x, self.y)
         tur.pendown()
+        
 
         for i in range(4):
 
@@ -84,15 +80,16 @@ class Tacha():
             tur.right(45)
            
 
-def dibujar_tacha(x, y):
-    tacha = Tacha(width/3, x, y)  
-    tacha.dibujo()
+def draw_tacha(new_x,new_y):
+    tacha = Tacha(width/3, new_x, new_y)  
+    tacha.draw()
 
 
-screen.onclick(dibujar_tacha)
+#screen.onclick(draw_tacha)
 
 
-class Reg():
+#Dibujamos el tablero, las dimesiones cambian junto con la pantalla
+class Panel():
 
     def __init__(self,width,height):
         
@@ -100,8 +97,7 @@ class Reg():
         self.height = height
 
 
-    def dibujo(self):
-
+    def draw(self):
 
         lw = self.width/6
         lh = self.height/6
@@ -109,6 +105,7 @@ class Reg():
         tur.penup()
         tur.goto(-self.width/2, lw)
         tur.pendown()
+        tur.width(10)
         tur.forward(self.width)
         tur.penup()
 
@@ -128,32 +125,88 @@ class Reg():
 
         tur.penup()
 
-def tablero():
+def draw_panel():
 
-    reg=Reg(width,width)
-    reg.dibujo()
+    reg=Panel(width,width)
+    reg.draw()
 
-tablero()
+draw_panel()
+
+turn = True
+
+#Funcion para que cheque que revisa en que rango esta la coordenada del mouse 
+
+def coor(x,y):
+
+    global width
+    global turn 
+
+    match(x,y):
+
+        case(x,y) if x < (-width/6) and y > (width/6):
+
+            new_x = -width/3
+            new_y = width/3
+
+        case(x,y) if x > (-width/6) and y > (width/6) and x < (width/6):
+
+            new_x = 0.0
+            new_y = width/3
+
+        case(x,y) if x > (width/6) and y > (width/6):
+
+            new_x = width/3
+            new_y = width/3
+
+        case(x,y) if y < (width/6) and y > (-width/6) and x < (-width/6):
+
+            new_x = -width/3
+            new_y = 0.0
+
+        case(x,y) if x > (-width/6) and x < (width/6) and y > (-width/6) and y < (width/6):
+
+            new_x = 0.0
+            new_y = 0.0
+
+        case(x,y) if x > (width/6) and y > (-width/6) and y <(width/6):
+
+            new_x = width/3
+            new_y = 0.0
+
+        case(x,y) if x < (-width/6) and y < (-width/6):
+
+            new_x = -width/3
+            new_y = -width/3
+
+        case(x,y) if x > (-width/6) and x < (width/6) and y < (-width/6):
+
+            new_x = 0.0
+            new_y = -width/3
+
+        case _:
+
+            new_x = width/3
+            new_y = -width/3
 
 
 
-turno = True
-
-def turnos(x, y):
-
-    global turno 
-
-
-    if turno == True:
-        tacha = Tacha(width/3, x, y)  
-        tacha.dibujo()
+    if turn == True:
+        
+        tacha = Tacha(width/3,new_x,new_y)  
+        tacha.draw()
+        
     else:
-        circ = Circulo(width/6,x,y)
-        circ.dibujo()
+        circ = Circle(width/6,new_x,new_y)
+        circ.draw()
+        
 
-    turno = not turno   
+    turn = not turn  
+           
 
-screen.onclick(turnos)
+
+screen.onclick(coor)
+#screen.onclick(turns)
+
 
 
 turtle.done()

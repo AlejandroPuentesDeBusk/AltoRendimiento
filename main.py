@@ -1,11 +1,10 @@
-import turtle
 
-from objetos import tablero, dibujar_circulo, dibujar_tacha,turnos
+from objetos import draw_panel, coor
 
 
 def main():
 
-    tablero()
-    turnos()
+    draw_panel()
+    coor()
 
 main()
