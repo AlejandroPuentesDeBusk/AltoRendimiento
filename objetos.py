@@ -5,9 +5,10 @@ import turtle
 tur = turtle.Turtle()
 speed= tur.speed(0)
 screen = turtle.Screen()
+turtle.bgcolor("#729A91")
 screen.title("Gato")
 screen.setup(600,600)
-turtle.bgcolor("#729A91")
+
 
 #Objeto linea
 
@@ -158,11 +159,15 @@ class Tablero():
         self.turn  = True
         self.m = None
 
+        self.combination_1 = []
+        self.combination_2 = []
+
         self.jugador1 = "         "
         self.jugador2 = "         "
 
     def get_width(self):
         return self.width
+    
 
     def coor(self,x,y):
 
@@ -174,56 +179,58 @@ class Tablero():
 
                 new_x = -width/3
                 new_y = width/3
-                self.m = 0
+                self.m = 1
 
             case(x,y) if x > (-width/6) and y > (width/6) and x < (width/6):
 
                 new_x = 0.0
                 new_y = width/3
-                self.m = 1
+                self.m = 2
 
             case(x,y) if x > (width/6) and y > (width/6):
 
                 new_x = width/3
                 new_y = width/3
-                self.m = 2
+                self.m = 3
 
             case(x,y) if y < (width/6) and y > (-width/6) and x < (-width/6):
 
                 new_x = -width/3
                 new_y = 0.0
-                self.m = 3
+                self.m = 4
 
             case(x,y) if x > (-width/6) and x < (width/6) and y > (-width/6) and y < (width/6):
 
                 new_x = 0.0
                 new_y = 0.0
-                self.m = 4
+                self.m = 5
 
             case(x,y) if x > (width/6) and y > (-width/6) and y <(width/6):
 
                 new_x = width/3
                 new_y = 0.0
-                self.m = 5
+                self.m = 6
 
             case(x,y) if x < (-width/6) and y < (-width/6):
 
                 new_x = -width/3
                 new_y = -width/3
-                self.m = 6
+                self.m = 7
 
             case(x,y) if x > (-width/6) and x < (width/6) and y < (-width/6):
 
                 new_x = 0.0
                 new_y = -width/3
-                self.m = 7
+                self.m = 8
 
             case _:
 
                 new_x = width/3
                 new_y = -width/3
-                self.m = 8
+                self.m = 9
         print(self.m)
+
+        
 
 
     #Va alternando la X y el Circulo
@@ -233,56 +240,207 @@ class Tablero():
             
             tacha = Tacha(self.width/3,new_x,new_y)  
             tacha.draw()
-        
-           
-            self.jugador1 = self.jugador1[:self.m] + '.' + self.jugador1[self.m+1:] 
-           
+
+            
+            self.combination_1.append(self.m)
+            print(self.combination_1)
+            
             
         else:
             circ = Circle(width/6,new_x,new_y)
             circ.draw()
             
+            self.combination_2.append(self.m)
+            print(self.combination_2)
             
-            self.jugador2 = self.jugador2[:self.m] + '.' + self.jugador2[self.m+1:] 
+             
             
 
         self.win()
             
         self.turn = not self.turn  
-        #print(self.turn)
 
 
     def win(self):
+       
+       a,b,c = 1,4,7
+       z,x,y = 1,2,3
+       o,p,q = 1,5,9
+      
+       w = "You win"
 
-        escenarios_ganadores = [
-            "...      ",
-            "   ...   ",
-            "      ...",
-            ".   .   .",
-            "  . . .  ",
-            ".  .  .  ",
-            " .  .  . ",
-            "  .  .  ."
+    #comprobador de las x
+
+       match self.combination_1:
+           
+           #PARADAS
+           case self.combination_1:
+                
+                for i in range(3):
+
+        
+                    if a in self.combination_1 and b in self.combination_1 and c in self.combination_1:
+
+                        print(f"{w} : player x")
+
+                        if i == 0:
+
+                            draw_line(-self.width/3,self.width/2,-self.width/3,-self.width/2 )
+
+                        elif i == 1:
+
+                            draw_line(0.0,self.width/2,0.0,-self.width/2 )
+                        
+                        else:
+
+                            draw_line(self.width/3,self.width/2,self.width/3,-self.width/2 )
+
+                    a += 1
+                    b += 1
+                    c += 1
+        
+        #ACOSTADAS
+       match self.combination_1:
             
-        ]
-        #dondevarayita = [
-        #    [x1,y1,x2,y2],
-        #    [x1,y1,x2,y2],
-        #    [x1,y1,x2,y2],
-        #]
 
-        print("'"+self.jugador1+"'")
-        print(len(self.jugador1))
-
-        if self.jugador1 in escenarios_ganadores:
-            print("Gano jugador 1")
-        elif self.jugador2 in escenarios_ganadores:
-            print("Gano jugador 2")
+           case self.combination_1:
+               
+                for i in range(3):
 
 
+                    if z in self.combination_1 and x in self.combination_1 and y in self.combination_1:
+
+                        print(f"{w} : player x")
+
+                        if i == 0:
+
+                            draw_line(-self.width/2,self.width/3,self.width/2,self.width/3 )
+
+                        elif i == 1:
+
+                            draw_line(-self.width/2,0.0,self.width/2,0.0 )
+                        
+                        else:
+
+                            draw_line(-self.width/2,-self.width/3,self.width/2,-self.width/3 )
+
+                    z += 3
+                    x += 3
+                    y += 3  
 
 
-#Turtle parameters
+       match self.combination_1:
+
+           case self.combination_1:
+               
+                for i in range(2):
+
+                    if o in self.combination_1 and p in self.combination_1 and q in self.combination_1:
+
+                        print(f"{w} : player x")
+
+                        if i == 0:
+
+                            draw_line(-self.width/2,self.width/2,self.width/2,-self.width/2 )
+
+                        elif i == 1:
+
+                            draw_line(self.width/2,self.width/2,-self.width/2,-self.width/2 )
+
+                    o += 2
+                    q +=-2
+
+       a,b,c = 1,4,7
+       z,x,y = 1,2,3
+       o,p,q = 1,5,9
+                
+
+    #comprobador del circulo
+       match self.combination_2:
+           
+           
+           case self.combination_2:
+                
+                for i in range(3):
+
+        
+                    if a in self.combination_2 and b in self.combination_2 and c in self.combination_2:
+
+                        print(f"{w} : player O")
+
+                        if i == 0:
+
+                            draw_line(-self.width/3,self.width/2,-self.width/3,-self.width/2 )
+
+                        elif i == 1:
+
+                            draw_line(0.0,self.width/2,0.0,-self.width/2 )
+                        
+                        else:
+
+                            draw_line(self.width/3,self.width/2,self.width/3,-self.width/2 )
+
+
+                    a += 1
+                    b += 1
+                    c += 1
+
+       match self.combination_2:
+            
+
+           case self.combination_2:
+               
+                for i in range(3):
+
+
+                    if z in self.combination_2 and x in self.combination_2 and y in self.combination_2:
+
+                        print(f"{w} : player O")
+
+                        if i == 0:
+
+                            draw_line(-self.width/2,self.width/3,self.width/2,self.width/3 )
+
+                        elif i == 1:
+
+                            draw_line(-self.width/2,0.0,self.width/2,0.0 )
+                        
+                        else:
+
+                            draw_line(-self.width/2,-self.width/3,self.width/2,-self.width/3 )
+
+
+                    z += 3
+                    x += 3
+                    y += 3  
+
+       match self.combination_2:
+
+           case self.combination_2:
+               
+                for i in range(2):
+
+                    if o in self.combination_2 and p in self.combination_2 and q in self.combination_2:
+
+                        print(f"{w} : player O")
+
+                        if i == 0:
+
+                            draw_line(-self.width/2,self.width/2,self.width/2,-self.width/2 )
+
+                        elif i == 1:
+
+                            draw_line(self.width/2,self.width/2,-self.width/2,-self.width/2 )
+
+                    o += 2
+                    q +=-2
+                
+                    
+
+
+
+
+#Open
 
 juego = Tablero(width = 600)
 panel = Panel(tur, juego.get_width() , juego.get_width())
