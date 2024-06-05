@@ -7,10 +7,22 @@ speed= tur.speed(0)
 screen = turtle.Screen()
 turtle.bgcolor("#729A91")
 screen.title("Gato")
-screen.setup(600,600)
+width= 600
+screen.setup(width,width)
 
 
 #Objeto linea
+
+class Victory():
+
+    def __init__(self,width):
+
+        self.width = width
+
+    def draw(self):
+
+        tur.penup()
+        tur.goto()
 
 class Line():
 
@@ -40,8 +52,6 @@ def draw_line(x,y,x1,y1):
     line.draw()
 
 
-
-
 #Creamos el objeto circulo, se dibuja en el punto donde das click
 class Circle():
 
@@ -49,7 +59,6 @@ class Circle():
     x = 0
     y = 0
    
-    
     def __init__(self, radio,x=0,y=0):
 
         self.radio = float(radio)-10
@@ -435,14 +444,13 @@ class Tablero():
                     o += 2
                     q +=-2
                 
-                    
-
-
-
 
 #Open
 
-juego = Tablero(width = 600)
+vic = Victory(width)
+juego = Tablero(width)
+
+#inicia="xo xx o  "
 panel = Panel(tur, juego.get_width() , juego.get_width())
 panel.draw()
 screen.onclick(juego.coor)
