@@ -174,13 +174,30 @@ class Tablero():
         self.jugador1 = "         "
         self.jugador2 = "         "
 
+        self.positions =[" "," "," "," "," "," "," "," "," "]
+        self.conditions=[True, True, True,True, True, True,True, True, True]
+        
+
     def get_width(self):
         return self.width
+    
+    def state(self, m):
+
+        self.conditions[m-1] += 1
+        print(self.conditions)
+    
+    def ia(self,m,icon):
+
+        self.positions[m-1] = icon
+        print (self.positions)
+
     
 
     def coor(self,x,y):
 
         width = self.width
+        
+
 
         match(x,y):
 
@@ -189,6 +206,8 @@ class Tablero():
                 new_x = -width/3
                 new_y = width/3
                 self.m = 1
+               
+                
 
             case(x,y) if x > (-width/6) and y > (width/6) and x < (width/6):
 
@@ -245,7 +264,7 @@ class Tablero():
     #Va alternando la X y el Circulo
 
 
-        if self.turn == True:
+        if self.turn == True and self.conditions[self.m] == True:
             
             tacha = Tacha(self.width/3,new_x,new_y)  
             tacha.draw()
@@ -253,21 +272,29 @@ class Tablero():
             
             self.combination_1.append(self.m)
             print(self.combination_1)
+            self.ia(self.m,"x")
+
+            self.turn = not self.turn  
             
             
-        else:
+            
+        elif self.turn == False and self.conditions[self.m] == True:
             circ = Circle(width/6,new_x,new_y)
             circ.draw()
             
             self.combination_2.append(self.m)
             print(self.combination_2)
+            self.ia(self.m,"o")
+
+            self.turn = not self.turn  
             
              
             
 
         self.win()
             
-        self.turn = not self.turn  
+        #self.turn = not self.turn  
+        self.conditions[self.m] = False
 
 
     def win(self):
@@ -446,7 +473,6 @@ class Tablero():
                 
 
 #Open
-
 vic = Victory(width)
 juego = Tablero(width)
 
