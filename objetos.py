@@ -175,7 +175,7 @@ class Tablero():
         self.jugador2 = "         "
 
         self.positions =[" "," "," "," "," "," "," "," "," "]
-        self.conditions=[True, True, True,True, True, True,True, True, True]
+        self.conditions=[True, True, True,True, True, True,True, True, True,True]
         
 
     def get_width(self):
