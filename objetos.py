@@ -189,8 +189,12 @@ class Tablero():
     def ia(self,m,icon):
 
         self.positions[m-1] = icon
-        print (self.positions)
+        jugadas = "".join(self.positions)
+        print (jugadas)
 
+        notas = open("IA.txt", "w")
+        notas.write(jugadas+ "\n")
+        notas.close()
     
 
     def coor(self,x,y):
@@ -207,7 +211,6 @@ class Tablero():
                 new_y = width/3
                 self.m = 1
                
-                
 
             case(x,y) if x > (-width/6) and y > (width/6) and x < (width/6):
 
@@ -259,8 +262,6 @@ class Tablero():
         print(self.m)
 
         
-
-
     #Va alternando la X y el Circulo
 
 
@@ -292,8 +293,6 @@ class Tablero():
             
 
         self.win()
-            
-        #self.turn = not self.turn  
         self.conditions[self.m] = False
 
 
