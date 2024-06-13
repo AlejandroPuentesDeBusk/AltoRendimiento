@@ -192,7 +192,7 @@ class Tablero():
         jugadas = "".join(self.positions)
         print (jugadas)
 
-        notas = open("IA.txt", "w")
+        notas = open("IA_10.txt", "a")
         notas.write(jugadas+ "\n")
         notas.close()
     
