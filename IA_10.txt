@@ -1,5 +1,0 @@
-  x      
-  x   o  
- xx   o  
- xx   o o
-xxx   o o

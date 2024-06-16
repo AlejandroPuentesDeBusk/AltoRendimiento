@@ -1,5 +1,0 @@
- x       
- x o     
- x ox    
- x ox o  
- x ox ox 
