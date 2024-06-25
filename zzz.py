@@ -1,28 +1,16 @@
 import turtle
 
-
-#Turtle parameters
-#tur = turtle.Turtle()
-#speed= tur.speed(0)
-#screen = turtle.Screen()  ######
 turtle.bgcolor("#729A91")
-#screen.title("Gato")    ########
-#width= 600
-#screen.setup(width,width)
-
-
 
 class Line():
 
-    lenght = 0.0
+
 
     def __init__(self,x,y,x1,y1):
 
-        self.tur = turtle.Turtle() #################
+        self.tur = turtle.Turtle() 
         self.speed= self.tur.speed(0)
       
-        
-        
         self.x = float(x)
         self.y = float(y)
         self.x1 = float(x1)
@@ -30,10 +18,8 @@ class Line():
 
     def draw(self):
 
-        tur= self.tur ###############
+        tur= self.tur 
         self.speed= tur.speed(0)
-
-
         tur.width(10)
         tur.color("#CC0609")
 
@@ -58,7 +44,7 @@ class Circle():
    
     def __init__(self, radio,x=0,y=0):
 
-        self.tur = turtle.Turtle() ################
+        self.tur = turtle.Turtle() 
         self.speed= self.tur.speed(0)
         self.radio = float(radio)-10
         self.x = int(x)
@@ -66,7 +52,7 @@ class Circle():
        
     def draw(self):
 
-        tur = self.tur  ##################
+        tur = self.tur  
         self.speed= tur.speed(0)
 
         tur.width(5)
@@ -91,7 +77,7 @@ class Tacha():
 
     def __init__(self,line,x=0,y=0):
 
-        self.tur = turtle.Turtle()  ##############
+        self.tur = turtle.Turtle()  
         self.speed= self.tur.speed(0)
 
         self.line = float(line)
@@ -100,7 +86,7 @@ class Tacha():
 
     def draw(self):
 
-        tur = self.tur  ################
+        tur = self.tur  
         self.speed= tur.speed(0)
 
         tur.width(5)
@@ -127,15 +113,13 @@ class Tacha():
 #Dibujamos el tablero, las dimesiones cambian junto con la pantalla
 class Panel():
 
-    def __init__(self,width,height):    ###########(tur:2)
+    def __init__(self,width,height):    
         
 
         self.tur = turtle.Turtle()
         self.speed= self.tur.speed(0)
-        
-        self.screen = turtle.Screen()  #########
-        self.screen.setup(width,width) #########
-        #self.tur = tur     #################
+        self.screen = turtle.Screen()  
+        self.screen.setup(width,width) 
         self.width = width
         self.height = height
 
@@ -310,9 +294,6 @@ class Tablero():
 
             self.turn = not self.turn  
             
-             
-            
-
         self.win()
         self.conditions[self.m] = False
 
@@ -501,14 +482,3 @@ class Tablero():
         turtle.done()
 
                 
-
-#Open
-
-#juego = Tablero(width)
-
-
-#panel = Panel( juego.get_width() , juego.get_width())
-#panel.draw()
-#screen.onclick(juego.coor)
-
-#turtle.done()
