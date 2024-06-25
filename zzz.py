@@ -1,42 +1,46 @@
 import turtle
 
 
+#Turtle parameters
+#tur = turtle.Turtle()
+#speed= tur.speed(0)
+#screen = turtle.Screen()  ######
+turtle.bgcolor("#729A91")
+#screen.title("Gato")    ########
+#width= 600
+#screen.setup(width,width)
 
-#Objeto linea
 
-class Victory():
-
-    def __init__(self,width):
-
-        self.width = width
-        self.tur = turtle.Turtle()
-
-    def draw(self):
-
-        self.tur.penup()
-        self.tur.goto()
 
 class Line():
 
     lenght = 0.0
 
     def __init__(self,x,y,x1,y1):
+
+        self.tur = turtle.Turtle() #################
+        self.speed= self.tur.speed(0)
+      
+        
         
         self.x = float(x)
         self.y = float(y)
         self.x1 = float(x1)
         self.y1 = float(y1)
-        self.tur = turtle.Turtle()
 
     def draw(self):
 
-        self.tur.width(10)
-        self.tur.color("#CC0609")
+        tur= self.tur ###############
+        self.speed= tur.speed(0)
 
-        self.tur.penup()
-        self.tur.goto(self.x, self.y)
-        self.tur.pendown()
-        self.tur.goto(self.x1, self.y1)
+
+        tur.width(10)
+        tur.color("#CC0609")
+
+        tur.penup()
+        tur.goto(self.x, self.y)
+        tur.pendown()
+        tur.goto(self.x1, self.y1)
         
 
 def draw_line(x,y,x1,y1):
@@ -54,19 +58,24 @@ class Circle():
    
     def __init__(self, radio,x=0,y=0):
 
+        self.tur = turtle.Turtle() ################
+        self.speed= self.tur.speed(0)
         self.radio = float(radio)-10
         self.x = int(x)
         self.y = int(y)
        
     def draw(self):
 
-        self.tur.width(5)
-        self.tur.color("#E0E8E6")
+        tur = self.tur  ##################
+        self.speed= tur.speed(0)
 
-        self.tur.penup()
-        self.tur.goto(self.x, self.y-self.radio)
-        self.tur.pendown()
-        self.tur.circle(self.radio)
+        tur.width(5)
+        tur.color("#E0E8E6")
+
+        tur.penup()
+        tur.goto(self.x, self.y-self.radio)
+        tur.pendown()
+        tur.circle(self.radio)
 
 
 #screen.onclick(draw_circle)
@@ -82,29 +91,33 @@ class Tacha():
 
     def __init__(self,line,x=0,y=0):
 
+        self.tur = turtle.Turtle()  ##############
+        self.speed= self.tur.speed(0)
+
         self.line = float(line)
         self.x = int(x)
         self.y = int(y)
-        self.tur = turtle.Turtle()
 
     def draw(self):
 
-        self.tur.width(5)
-        self.tur.color("#272727")
+        tur = self.tur  ################
+        self.speed= tur.speed(0)
 
-        self.tur.penup()
-        self.tur.goto(self.x, self.y)
-        self.tur.pendown()
+        tur.width(5)
+        tur.color("#272727")
+        tur.penup()
+        tur.goto(self.x, self.y)
+        tur.pendown()
         
 
         for i in range(4):
 
-            self.tur.penup()
-            self.tur.goto(self.x,self.y)
-            self.tur.pendown()
-            self.tur.right(45)
-            self.tur.forward(self.line/2)
-            self.tur.right(45)
+            tur.penup()
+            tur.goto(self.x,self.y)
+            tur.pendown()
+            tur.right(45)
+            tur.forward(self.line/2)
+            tur.right(45)
         
 
 
@@ -114,45 +127,54 @@ class Tacha():
 #Dibujamos el tablero, las dimesiones cambian junto con la pantalla
 class Panel():
 
-    def __init__(self,width,height):
+    def __init__(self,width,height):    ###########(tur:2)
         
+
+        self.tur = turtle.Turtle()
+        self.speed= self.tur.speed(0)
         
+        self.screen = turtle.Screen()  #########
+        self.screen.setup(width,width) #########
+        #self.tur = tur     #################
         self.width = width
-        self.width = 600
         self.height = height
-        self.tur =turtle.Turtle()
 
 
     def draw(self):
+
+      
+
+        tur = self.tur
+        self.speed= tur.speed(0)
+        self.screen = turtle.Screen()
+        self.screen.setup(self.width,self.width)
 
 
         lw = self.width/6
         lh = self.height/6
 
-        self.tur.penup()
-        self.tur.goto(-self.width/2, lw)
-        self.tur.pendown()
-        self.tur.width(10)
-        self.tur.forward(self.width)
-        self.tur.penup()
+        tur.penup()
+        tur.goto(-self.width/2, lw)
+        tur.pendown()
+        tur.width(10)
+        tur.forward(self.width)
+        tur.penup()
 
-        self.tur.goto(-self.width/2, -lh)
-        self.tur.pendown()
-        self.tur.forward(self.width)
-        self.tur.penup()
+        tur.goto(-self.width/2, -lh)
+        tur.pendown()
+        tur.forward(self.width)
+        tur.penup()
 
-        self.tur.goto(-lw, self.height/2)
-        self.tur.pendown()
-        self.tur.goto(-lw,-self.height/2)
-        self.tur.penup()
+        tur.goto(-lw, self.height/2)
+        tur.pendown()
+        tur.goto(-lw,-self.height/2)
+        tur.penup()
 
-        self.tur.goto(lw, self.height/2)
-        self.tur.pendown()
-        self.tur.goto(lw, -self.height/2)
+        tur.goto(lw, self.height/2)
+        tur.pendown()
+        tur.goto(lw, -self.height/2)
 
-        self.tur.penup()
-
-
+        tur.penup()
 
 
 #Le damos el valor de x, y del mouse
@@ -173,28 +195,9 @@ class Tablero():
         self.positions =[" "," "," "," "," "," "," "," "," "]
         self.conditions=[True, True, True,True, True, True,True, True, True,True]
 
-
-        #Turtle parameters
-        self.tur = turtle.Turtle()
-        self.speed= self.tur.speed(0)
         self.screen = turtle.Screen()
-        self.bgcolor= turtle.bgcolor("#729A91")
-        self.screen.title("Gato")
-        self.width= 600
-        self.screen.setup(self.width,self.width)
-
-
-        #Open
-        vic = Victory(self.width)
-        juego = Tablero(self.width)
-
-        #inicia="xo xx o  "
-        self.panel = Panel(self.tur, self.juego.get_width() , self.juego.get_width())
-        self.panel.draw()
-        self.screen.onclick(self.juego.coor)
-
-        self.tur.done()
-
+        
+        
 
     def get_width(self):
         return self.width
@@ -210,9 +213,7 @@ class Tablero():
         jugadas = "".join(self.positions)
         print (jugadas)
 
-        #Guardar las jugadas
-
-        #notas = open("IA_3.txt", "a")
+        #notas = open("IA_10.txt", "a")
         #notas.write(jugadas+ "\n")
         #notas.close()
     
@@ -489,17 +490,25 @@ class Tablero():
 
                     o += 2
                     q +=-2
+
+    def open(self):
+
+        juego = Tablero(600)
+        panel = Panel( juego.get_width() , juego.get_width())
+        panel.draw()
+        self.screen.onclick(juego.coor)
+
+        turtle.done()
+
                 
-"""
+
 #Open
-vic = Victory(width)
-juego = Tablero(width)
 
-#inicia="xo xx o  "
-panel = Panel(tur, juego.get_width() , juego.get_width())
-panel.draw()
-screen.onclick(juego.coor)
+#juego = Tablero(width)
 
-turtle.done()
 
-"""
+#panel = Panel( juego.get_width() , juego.get_width())
+#panel.draw()
+#screen.onclick(juego.coor)
+
+#turtle.done()
